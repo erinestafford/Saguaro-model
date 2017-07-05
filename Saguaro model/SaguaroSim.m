@@ -18,3 +18,4 @@ t0 = 6;
  xlabel('Time in Years');
  ylabel('Population')
 legend('S_j','S_a','T')
+%test
