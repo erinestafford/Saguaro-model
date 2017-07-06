@@ -4,7 +4,7 @@ s_j0 = 2000;
 s_a0 = 100;
 t0 = 1500;
 param_struct= ...
-{'r1',.05;
+{'r1',.65;%make function of time
 'k1', 3000;
 'b',.95;
 'gamma', 1/35;
