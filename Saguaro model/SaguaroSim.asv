@@ -1,14 +1,29 @@
 %% Params
 s_j0 = 400;
-s_a0 = 1000;
+s_a0 = 100;
 t0 = 600;
-params= struct('r1',0.1,'k1', 2000,'b',.75, 'gamma', 1/35, 'alpha1', .00001,'r2',.99 'd', 1/150,'k',.05, 'c', .02);
+params_struct= ...{
+'r1',.005;
+'k1', 3000;
+'b',.75;
+'gamma', 1/35;
+'alpha1', .00001;
+'r2',.993;
+'k2',1000;
+'muj', 0.005;
+'mua',1/145;
+'r3',0.75;
+'k3',3000;
+'alpha2',0.95;
+'mut',1/150;
+}';
+params = struct(param_struct{:});
 %phi is seeds that are germinated per year
 %delta is the natural death rate of the young saguaros without the
 %protection of host trees
 %% Simulation
  y0 = [s_j0 s_a0 t0];
- tspan = [0 20];
+ tspan = [0 200];
  fn = @(t,y)basicLifeCycle(t,y,params);
  [T,Y] = ode45(fn, tspan, y0);
  figure('DefaultAxesFontSize', 12)
