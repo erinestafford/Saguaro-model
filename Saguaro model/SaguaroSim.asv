@@ -2,7 +2,7 @@
 s_j0 = 400;
 s_a0 = 1000;
 t0 = 600;
-params= struct('phi',300,'delta', .85,'gamma',1/35, 'beta', 1/145, 'b', .01, 'd', 1/,'k',.05, 'c', .02);
+params= struct('r1',0.1,'k1', 2000,'b',.75, 'gamma', 1/35, 'alpha1', .00001,'r2',.99 'd', 1/150,'k',.05, 'c', .02);
 %phi is seeds that are germinated per year
 %delta is the natural death rate of the young saguaros without the
 %protection of host trees
