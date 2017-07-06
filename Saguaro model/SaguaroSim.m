@@ -7,20 +7,16 @@ params_struct= ...
 'k1', 3000;
 'b',.75;
 'gamma', 1/35;
-'alpha1', .00001;
-'r2',.993;
-'k2',1000;
+'c', .00001;
+'phi',.993;
+'A',1000;
 'muj', 0.005;
 'mua',1/145;
-'r3',0.75;
-'k3',3000;
+'alpha1', .6;
 'alpha2',0.95;
-'mut',1/150;
 }';
 params = struct(param_struct{:});
-%phi is seeds that are germinated per year
-%delta is the natural death rate of the young saguaros without the
-%protection of host trees
+
 %% Simulation
  y0 = [s_j0 s_a0 t0];
  tspan = [0 200];
