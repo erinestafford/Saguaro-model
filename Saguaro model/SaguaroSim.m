@@ -2,7 +2,7 @@
 s_j0 = 400;
 s_a0 = 100;
 t0 = 600;
-params_struct= ...
+param_struct= ...
 {'r1',.005;
 'k1', 3000;
 'b',.75;
