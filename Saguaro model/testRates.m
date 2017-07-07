@@ -1,2 +1,3 @@
-tspan = [0:(1/12):1];
+close all;
+tspan = [0:.001:2];
 plot(tspan,calc_r1(tspan))
