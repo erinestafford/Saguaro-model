@@ -1,19 +1,19 @@
 clear all; close all;
 %% Params
-s_j0 = 2000;
-s_a0 = 100;
+s_j0 = 4000;
+s_a0 = 1000;
 t0 = 1500;
 param_struct= ...
-{'r1',.65;%make function of time
-'k1', 3000;
-'b',.95;
+{'r1',.05;%make function of time?
+'k1', 300;
+'b',.85;
 'gamma', 1/35;
 'phi',0.005;
 'A',1000;
-'muj', 0.005;
+'muj', 0.05;
 'mua',1/145;
 'alpha1', .000001;
-'alpha2',0.85;
+'alpha2',0.75;
 }';
 params = struct(param_struct{:});
 
