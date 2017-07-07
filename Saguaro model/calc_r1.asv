@@ -1,3 +1,0 @@
-function g = calc_r1(t)
-g = .75*(1+.95*cos(3*t+pi/2));
-end
