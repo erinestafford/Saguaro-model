@@ -1,0 +1,2 @@
+function g = calc_r1(min,max,t)
+end
