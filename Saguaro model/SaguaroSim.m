@@ -5,17 +5,17 @@ s_a0 = 1100;
 t0 = 1000;
 space = 10000; %1 hectare, in meters
 param_struct= ...
-{'r1',(375*0.0126);%make function of time?
-'k1', 500;
+{'r1',4.725;%make function of time?
+'k1', 697.575;
 'b',.85;
 'gamma', 1/35;
-'phi',(0.05-1/100);
-'A',1000;
+'phi',0.012;
+'k2',1000;
 'muj', .25;
-'mua',1/50;
+'mua',1/140;
 'alpha1', .000001;
 'alpha2',0.95;
-'e', .25;
+'e', .113;
 }';
 params = struct(param_struct{:});
 
