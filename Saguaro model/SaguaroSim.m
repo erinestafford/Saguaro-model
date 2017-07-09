@@ -24,11 +24,15 @@ params = struct(param_struct{:});
  tspan = [0 400];
  fn = @(t,y)basicLifeCycle(t,y,params);
  [T,Y] = ode23s(fn, tspan, y0);
- figure('DefaultAxesFontSize', 12)
- plot(T,Y(:,1),'LineWidth', 2);
- hold on
- plot(T,Y(:,2),'LineWidth', 2);
- plot(T,Y(:,3),'LineWidth', 2);
- xlabel('Time in Years');
- ylabel('Population')
-legend('S_j','S_a','T')
+%  figure('DefaultAxesFontSize', 12)
+%  plot(T,Y(:,1),'LineWidth', 2);
+%  hold on
+%  plot(T,Y(:,2),'LineWidth', 2);
+%  plot(T,Y(:,3),'LineWidth', 2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+% legend('S_j','S_a','T')
+
+%% Sensitivity Analysis
+Q1 = @(param)Q1_Sa (param, Y, T);
+sensitivity_muj  = sensitivity_analysis(Q1,params,'muj')
