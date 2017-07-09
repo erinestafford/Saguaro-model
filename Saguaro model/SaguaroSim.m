@@ -1,12 +1,12 @@
 clear all; close all;
 %% Params
-s_j0 = 5;
-s_a0 = 27;
-t0 = 20;
+s_j0 = 200;
+s_a0 = 800;
+t0 = 500;
 space = 10000; %1 hectare, in meters
 param_struct= ...
 {'r1',4.725;%make function of time?
-'k1', 697.575;
+'k1', 165;
 'b',1;
 'gamma', 1/35;
 'phi',0.012;
@@ -24,15 +24,34 @@ params = struct(param_struct{:});
  tspan = [0 400];
  fn = @(t,y)basicLifeCycle(t,y,params);
  [T,Y] = ode23s(fn, tspan, y0);
-%  figure('DefaultAxesFontSize', 12)
-%  plot(T,Y(:,1),'LineWidth', 2);
-%  hold on
-%  plot(T,Y(:,2),'LineWidth', 2);
-%  plot(T,Y(:,3),'LineWidth', 2);
-%  xlabel('Time in Years');
-%  ylabel('Population')
-% legend('S_j','S_a','T')
+ figure('DefaultAxesFontSize', 12)
+ plot(T,Y(:,1),'LineWidth', 2);
+ hold on
+ plot(T,Y(:,2),'LineWidth', 2);
+ plot(T,Y(:,3),'LineWidth', 2);
+ xlabel('Time in Years');
+ ylabel('Population')
+legend('S_j','S_a','T')
 
+ y0 = [s_j0 s_a0 t0];
+ tspan = [0 400];
+ fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
+ [T,Y] = ode23s(fn, tspan, y0);
+ figure('DefaultAxesFontSize', 12)
+ plot(T,Y(:,1),'LineWidth', 2);
+ hold on
+ plot(T,Y(:,2),'LineWidth', 2);
+ plot(T,Y(:,3),'LineWidth', 2);
+ xlabel('Time in Years');
+ ylabel('Population')
+legend('S_j','S_a','T')
 %% Sensitivity Analysis
-Q1 = @(param)Q1_Sa (param, Y, T);
-sensitivity_muj  = sensitivity_analysis(Q1,params,'muj')
+% Q1 = @(param)Q1_Sa (param,y0, T);
+% sensitivity_mua  = sensitivity_analysis(Q1,params,'mua')
+% Q1 = @(param)Q1_Sa (param,y0, T);
+% sensitivity_muj  = sensitivity_analysis(Q1,params,'muj')
+% 
+% Q2 = @(param)Q2_Sj (param,y0, T);
+% sensitivity_mua  = sensitivity_analysis(Q2,params,'mua')
+% Q2 = @(param)Q1_Sj (param,y0, T);
+% sensitivity_muj  = sensitivity_analysis(Q2,params,'muj')
