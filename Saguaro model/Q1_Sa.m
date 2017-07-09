@@ -1,5 +1,5 @@
-function [S_a] = Q1_Sa (params, out, t)
+function [S_a] = Q1_Sa (params, output, time)
 fn = @(t,y)basicLifeCycle(t,y,params);
-[time,output] = ode23s(fn,t , out);
-S_a = output(end,2);
+[T,Y] = ode23s(fn,time, output);
+S_a = Y(end,2);
 end
