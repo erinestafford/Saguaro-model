@@ -3,6 +3,7 @@ clear all; close all;
 s_j0 = 200;
 s_a0 = 800;
 t0 = 500;
+b0 = 800;
 space = 10000; %1 hectare, in meters
 param_struct= ...
 {'r1',4.725;%make function of time?
@@ -16,32 +17,53 @@ param_struct= ...
 'alpha1', .000001;
 'alpha2',1/100;
 'e', .113;
+'omega',.4*(100)-(1/20);
+'k3', 119599; %max density per hectare
+'mub',1/3;
+'theta_j', 0.95/(5000*200);
+'theta_a', 0.95/(5000*200);
+'theta_t', 0.75/(5000*200);
+'theta_b', 0.0005/(5000*200);
 }';
 params = struct(param_struct{:});
 
-%% Simulation
- y0 = [s_j0 s_a0 t0];
- tspan = [0 400];
- fn = @(t,y)basicLifeCycle(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
- figure('DefaultAxesFontSize', 12)
- plot(T,Y(:,1),'LineWidth', 2);
- hold on
- plot(T,Y(:,2),'LineWidth', 2);
- plot(T,Y(:,3),'LineWidth', 2);
- xlabel('Time in Years');
- ylabel('Population')
-legend('S_j','S_a','T')
+%% Simulations
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 400];
+%  fn = @(t,y)basicLifeCycle(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
+%  figure('DefaultAxesFontSize', 12)
+%  plot(T,Y(:,1),'LineWidth', 2);
+%  hold on
+%  plot(T,Y(:,2),'LineWidth', 2);
+%  plot(T,Y(:,3),'LineWidth', 2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+% legend('S_j','S_a','T')
+% 
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 400];
+%  fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
+%  figure('DefaultAxesFontSize', 12)
+%  plot(T,Y(:,1),'LineWidth', 2);
+%  hold on
+%  plot(T,Y(:,2),'LineWidth', 2);
+%  plot(T,Y(:,3),'LineWidth', 2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+% legend('S_j','S_a','T')
 
- y0 = [s_j0 s_a0 t0];
- tspan = [0 400];
- fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
+ y0 = [s_j0 s_a0 t0 b0];
+ tspan = [0 100];
+ fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params);
  [T,Y] = ode23s(fn, tspan, y0);
  figure('DefaultAxesFontSize', 12)
- plot(T,Y(:,1),'LineWidth', 2);
- hold on
- plot(T,Y(:,2),'LineWidth', 2);
- plot(T,Y(:,3),'LineWidth', 2);
+  plot(T,Y(:,1),'LineWidth', 2);
+  hold on
+  plot(T,Y(:,2),'LineWidth', 2);
+  plot(T,Y(:,3),'LineWidth', 2);
+ %plot(T,Y(:,4),'LineWidth',2);
  xlabel('Time in Years');
  ylabel('Population')
 legend('S_j','S_a','T')
