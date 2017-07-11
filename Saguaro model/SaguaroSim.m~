@@ -47,17 +47,17 @@ legend('S_j','S_a','T')
 legend('S_j','S_a','T')
 %% Sensitivity Analysis
 Q1 = @(param)Q1_Sa (param,y0, T);
-sensitivity_mua_a  = sensitivity_analysis(Q1,params,'mua')
+sensitivity_mua  = sensitivity_analysis(Q1,params,'mua')
 Q1 = @(param)Q1_Sa (param,y0, T);
-sensitivity_muj_a  = sensitivity_analysis(Q1,params,'muj')
-
-Q2 = @(param)Q2_Sj (param,y0, T);
-sensitivity_mua_j  = sensitivity_analysis(Q2,params,'mua')
-Q2 = @(param)Q2_Sj (param,y0, T);
-sensitivity_muj_j  = sensitivity_analysis(Q2,params,'muj')
-
-Q3 = @(param)Q3_T (param,y0, T);
-sensitivity_mua_t  = sensitivity_analysis(Q3,params,'mua')
-Q3 = @(param)Q3_T (param,y0, T);
-sensitivity_muj_t  = sensitivity_analysis(Q3,params,'muj')
+sensitivity_muj  = sensitivity_analysis(Q1,params,'muj')
+% 
+% Q2 = @(param)Q2_Sj (param,y0, T);
+% sensitivity_mua  = sensitivity_analysis(Q2,params,'mua')
+% Q2 = @(param)Q1_Sj (param,y0, T);
+% sensitivity_muj  = sensitivity_analysis(Q2,params,'muj')
+% 
+% Q3 = @(param)Q3_T (param,y0, T);
+% sensitivity_mua  = sensitivity_analysis(Q2,params,'mua')
+% Q3 = @(param)Q3_T (param,y0, T);
+% sensitivity_muj  = sensitivity_analysis(Q2,params,'muj')
 
