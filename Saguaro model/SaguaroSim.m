@@ -27,10 +27,11 @@ param_struct= ...
 params = struct(param_struct{:});
 
 %% Simulations
-%  y0 = [s_j0 s_a0 t0];
-%  tspan = [0 400];
-%  fn = @(t,y)basicLifeCycle(t,y,params);
-%  [T,Y] = ode23s(fn, tspan, y0);
+%original
+ y0 = [s_j0 s_a0 t0];
+ tspan = [0 400];
+ fn = @(t,y)basicLifeCycle(t,y,params);
+ [T,Y] = ode23s(fn, tspan, y0);
 %  figure('DefaultAxesFontSize', 12)
 %  plot(T,Y(:,1),'LineWidth', 2);
 %  hold on
@@ -53,26 +54,36 @@ params = struct(param_struct{:});
 %  ylabel('Population')
 % legend('S_j','S_a','T')
 
- y0 = [s_j0 s_a0 t0 b0];
- tspan = [0 300];
- fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params);%Not seasonal 
- [T,Y] = ode23s(fn, tspan, y0);
- figure('DefaultAxesFontSize', 12)
-  plot(T,Y(:,1),'LineWidth', 2);
-  hold on
-  plot(T,Y(:,2),'LineWidth', 2);
-  plot(T,Y(:,3),'LineWidth', 2);
- %plot(T,Y(:,4),'LineWidth',2);
- xlabel('Time in Years');
- ylabel('Population')
-legend('S_j','S_a','T')
+% buffelgrass
+%  y0 = [s_j0 s_a0 t0 b0];
+%  tspan = [0 300];
+%  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
+%  [T,Y] = ode23s(fn, tspan, y0);
+%  figure('DefaultAxesFontSize', 12)
+%   plot(T,Y(:,1),'LineWidth', 2);
+%   hold on
+%   plot(T,Y(:,2),'LineWidth', 2);
+%   plot(T,Y(:,3),'LineWidth', 2);
+%  %plot(T,Y(:,4),'LineWidth',2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+% legend('S_j','S_a','T')
 %% Sensitivity Analysis
-% Q1 = @(param)Q1_Sa (param,y0, T);
-% sensitivity_mua  = sensitivity_analysis(Q1,params,'mua')
-% Q1 = @(param)Q1_Sa (param,y0, T);
-% sensitivity_muj  = sensitivity_analysis(Q1,params,'muj')
-% 
-% Q2 = @(param)Q2_Sj (param,y0, T);
-% sensitivity_mua  = sensitivity_analysis(Q2,params,'mua')
-% Q2 = @(param)Q1_Sj (param,y0, T);
-% sensitivity_muj  = sensitivity_analysis(Q2,params,'muj')
+Q1 = @(param)Q1_Sa (param,y0, T);
+sensitivity_k2_a  = sensitivity_analysis(Q1,params,'k2');
+Q1 = @(param)Q1_Sa (param,y0, T);
+sensitivity_alpha2_a  = sensitivity_analysis(Q1,params,'alpha2');
+
+Q2 = @(param)Q2_Sj (param,y0, T);
+sensitivity_k2_j  = sensitivity_analysis(Q2,params,'k2');
+Q2 = @(param)Q2_Sj (param,y0, T);
+sensitivity_alpha2_j  = sensitivity_analysis(Q2,params,'alpha2');
+
+Q3 = @(param)Q3_T (param,y0, T);
+sensitivity_k2_t  = sensitivity_analysis(Q3,params,'k2');
+Q3 = @(param)Q3_T (param,y0, T);
+sensitivity_alpha2_t  = sensitivity_analysis(Q3,params,'alpha2');
+
+figure()
+plot_sensitivity(Q3,'muj',[0.2:.001:0.8],params)
+title('\mu_j w.r.t. T')

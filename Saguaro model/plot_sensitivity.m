@@ -14,4 +14,5 @@ function [] = plot_sensitivity(Q_fn, param_name, param_range, params)
     
     plot(param_range,y);
     xlabel(strcat(param_name, ' value'));
+    ylabel('quantity value')
 end
