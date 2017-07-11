@@ -20,9 +20,9 @@ param_struct= ...
 'omega',.35;
 'k3', 60000; %max density per hectare
 'mub',1/3;
-'theta_j', 1/(10000*250*.01);%(mortality of species)/(rando)(frequency)
-'theta_a', 0.65/(10000*250*.01);
-'theta_t', 0.5/(10000*250*.01);
+'theta_j', 1/(1111*250*(1-.01));%(mortality of species)/(min buffel pop)( fire frequency)
+'theta_a', 0.65/(1111*250*(1-.01));
+'theta_t', 0.5/(1111*250*(1-.01));
 }';
 params = struct(param_struct{:});
 
@@ -55,7 +55,7 @@ params = struct(param_struct{:});
 
  y0 = [s_j0 s_a0 t0 b0];
  tspan = [0 300];
- fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params);
+ fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params);%Not seasonal 
  [T,Y] = ode23s(fn, tspan, y0);
  figure('DefaultAxesFontSize', 12)
   plot(T,Y(:,1),'LineWidth', 2);
