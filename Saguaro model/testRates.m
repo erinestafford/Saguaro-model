@@ -1,5 +1,11 @@
 close all;
 tspan = [0:.001:1];
+% figure()
+% plot(tspan,calc_r1(tspan))
+% xlabel('Time, Over One Year')
+% ylabel('Rate that Juvenile Saguaros Enter the Population')
+% title('Rate that Juvenile Saguaros Enter the Population')
+
 subplot(1,2,1)
 plot(tspan,calc_muj(tspan))
 xlabel('Time, Over One Year')
