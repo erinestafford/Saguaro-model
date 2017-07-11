@@ -1,9 +1,9 @@
 clear all; close all;
 %% Params
-s_j0 = 200;
-s_a0 = 800;
-t0 = 500;
-b0 = 800;
+s_j0 = 100;
+s_a0 = 150;
+t0 = 200;
+b0 = 500;
 space = 10000; %1 hectare, in meters
 param_struct= ...
 {'r1',4.725;%make function of time?
@@ -17,13 +17,12 @@ param_struct= ...
 'alpha1', .000001;
 'alpha2',1/100;
 'e', .113;
-'omega',.4*(100)-(1/20);
-'k3', 119599; %max density per hectare
+'omega',.35;
+'k3', 60000; %max density per hectare
 'mub',1/3;
-'theta_j', 0.95/(5000*200);
-'theta_a', 0.95/(5000*200);
-'theta_t', 0.75/(5000*200);
-'theta_b', 0.0005/(5000*200);
+'theta_j', 1/(10000*250*.01);%(mortality of species)/(rando)(frequency)
+'theta_a', 0.65/(10000*250*.01);
+'theta_t', 0.5/(10000*250*.01);
 }';
 params = struct(param_struct{:});
 
@@ -55,7 +54,7 @@ params = struct(param_struct{:});
 % legend('S_j','S_a','T')
 
  y0 = [s_j0 s_a0 t0 b0];
- tspan = [0 100];
+ tspan = [0 300];
  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params);
  [T,Y] = ode23s(fn, tspan, y0);
  figure('DefaultAxesFontSize', 12)
