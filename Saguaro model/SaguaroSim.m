@@ -20,18 +20,18 @@ param_struct= ...
 'omega',.35;
 'k3', 60000; %max density per hectare
 'mub',1/3;
-'theta_j', 1/(10000*250*.01);%(mortality of species)/(rando)(frequency)
-'theta_a', 0.65/(10000*250*.01);
-'theta_t', 0.5/(10000*250*.01);
+'theta_j', 1/(1111*250*(1-.01));%(mortality of species)/(min buffel pop)( fire frequency)
+'theta_a', 0.65/(1111*250*(1-.01));
+'theta_t', 0.5/(1111*250*(1-.01));
 }';
 params = struct(param_struct{:});
 
 %% Simulations
 %original
- y0 = [s_j0 s_a0 t0];
- tspan = [0 400];
- fn = @(t,y)basicLifeCycle(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 400];
+%  fn = @(t,y)basicLifeCycle(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
 %  figure('DefaultAxesFontSize', 12)
 %  plot(T,Y(:,1),'LineWidth', 2);
 %  hold on
@@ -40,11 +40,11 @@ params = struct(param_struct{:});
 %  xlabel('Time in Years');
 %  ylabel('Population')
 % legend('S_j','S_a','T')
-% 
-%  y0 = [s_j0 s_a0 t0];
-%  tspan = [0 400];
-%  fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
-%  [T,Y] = ode23s(fn, tspan, y0);
+% Seasonality
+ y0 = [s_j0 s_a0 t0];
+ tspan = [0 250];
+ fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
+ [T,Y] = ode23s(fn, tspan, y0);
 %  figure('DefaultAxesFontSize', 12)
 %  plot(T,Y(:,1),'LineWidth', 2);
 %  hold on
@@ -57,7 +57,7 @@ params = struct(param_struct{:});
 % buffelgrass
 %  y0 = [s_j0 s_a0 t0 b0];
 %  tspan = [0 300];
-%  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params);
+%  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
 %  [T,Y] = ode23s(fn, tspan, y0);
 %  figure('DefaultAxesFontSize', 12)
 %   plot(T,Y(:,1),'LineWidth', 2);
@@ -70,20 +70,20 @@ params = struct(param_struct{:});
 % legend('S_j','S_a','T')
 %% Sensitivity Analysis
 Q1 = @(param)Q1_Sa (param,y0, T);
-sensitivity_k2_a  = sensitivity_analysis(Q1,params,'k2');
+sensitivity_mua_a  = sensitivity_analysis(Q1,params,'mua');
 Q1 = @(param)Q1_Sa (param,y0, T);
-sensitivity_alpha2_a  = sensitivity_analysis(Q1,params,'alpha2');
+sensitivity_muj_a  = sensitivity_analysis(Q1,params,'muj');
 
 Q2 = @(param)Q2_Sj (param,y0, T);
-sensitivity_k2_j  = sensitivity_analysis(Q2,params,'k2');
+sensitivity_mua_j  = sensitivity_analysis(Q2,params,'mua');
 Q2 = @(param)Q2_Sj (param,y0, T);
-sensitivity_alpha2_j  = sensitivity_analysis(Q2,params,'alpha2');
+sensitivity_muj_j  = sensitivity_analysis(Q2,params,'muj');
 
 Q3 = @(param)Q3_T (param,y0, T);
-sensitivity_k2_t  = sensitivity_analysis(Q3,params,'k2');
+sensitivity_mua_t  = sensitivity_analysis(Q3,params,'mua');
 Q3 = @(param)Q3_T (param,y0, T);
-sensitivity_alpha2_t  = sensitivity_analysis(Q3,params,'alpha2');
+sensitivity_muj_t  = sensitivity_analysis(Q3,params,'muj');
 
 figure()
-plot_sensitivity(Q3,'muj',[0.2:.001:0.8],params)
-title('\mu_j w.r.t. T')
+plot_sensitivity(Q1,'mua',[0.2:.01:0.8],params)
+title('mu_a w.r.t. S_a')
