@@ -38,7 +38,6 @@ params = struct(param_struct{:});
 %  plot(T,Y(:,3),'LineWidth', 2);
 %  xlabel('Time in Years');
 %  ylabel('Population')
-<<<<<<< HEAD
 %  legend('S_j','S_a','T')
 
 %% varying params
@@ -63,12 +62,6 @@ params = struct(param_struct{:});
 %% Seasonality
 %  y0 = [s_j0 s_a0 t0];
 %  tspan = [0 300];
-=======
-% legend('S_j','S_a','T')
-% Seasonality
-%  y0 = [s_j0 s_a0 t0];
-%  tspan = [0 250];
->>>>>>> 786ac80f8d17e53de75c1bdd4a9848bbe5962a52
 %  fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
 %  [T,Y] = ode23s(fn, tspan, y0);
 %  subplot(1,2,2)
@@ -121,7 +114,6 @@ legend('S_j','S_a','T')
 %  xlabel('Time in Years');
 %  ylabel('Population')
 % legend('S_j','S_a','T')
-<<<<<<< HEAD
 
 %% Vary Buffel params - theta
 %vary theta
