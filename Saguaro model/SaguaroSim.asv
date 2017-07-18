@@ -71,49 +71,57 @@ params = struct(param_struct{:});
 % legend('S_j','S_a','T')
 
 %% vary params - r, pops wrt time
-figure()
-y0 = [s_j0 s_a0 t0];
- tspan = [0 300];
- fn = @(t,y)basicLifeCycle(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
- y0 = [s_j0 s_a0 t0];
- tspan = [0 400];
- rVals = .1:.5:5;
- subplot(1,3,1)
-for i= 1:length(rVals)
-    params.r1 = rVals(i);
-    fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
-    [T,Y] = ode23s(fn, tspan, y0);
-    plot(T,Y(:,1),'LineWidth', 2)
-    ylabel('S_j at equilbria')
-    title('Vary r')
-    hold on 
-end
-params.r1 = 4.725
-fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
-[T,Y] = ode23s(fn, tspan, y0);
-plot(T,Y(:,1),'LineWidth', 2)
-
- subplot(1,3,2)
-for i= 1:length(rVals)
-    params.r1 = rVals(i);
-    fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
-    [T,Y] = ode23s(fn, tspan, y0);
-    plot(T,Y(:,2),'LineWidth', 2)
-    ylabel('S_a at equilbria')
-    title('Vary r')
-    hold on 
-end
- subplot(1,3,3)
-for i= 1:length(rVals)
-    params.r1 = rVals(i);
-    fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
-    [T,Y] = ode23s(fn, tspan, y0);
-    plot(T,Y(:,3),'LineWidth', 2)
-    ylabel('T at equilbria')
-    title('Vary r')
-    hold on 
-end
+% figure()
+% y0 = [s_j0 s_a0 t0];
+%  tspan = [0 300];
+%  fn = @(t,y)basicLifeCycle(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 400];
+%  rVals = .1:.5:7;
+%  subplot(1,3,1)
+% for i= 1:length(rVals)
+%     params.r1 = rVals(i);
+%     fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     plot(T,Y(:,1),'LineWidth', 2)
+%     ylabel('S_j at equilbria')
+%     title('Vary r')
+%     hold on 
+% end
+% params.r1 = 4.725;
+% fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+% [T,Y] = ode23s(fn, tspan, y0);
+% plot(T,Y(:,1),'*-b','LineWidth', 2)
+% 
+%  subplot(1,3,2)
+% for i= 1:length(rVals)
+%     params.r1 = rVals(i);
+%     fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     plot(T,Y(:,2),'LineWidth', 2)
+%     ylabel('S_a at equilbria')
+%     title('Vary r')
+%     hold on 
+% end
+% params.r1 = 4.725
+% fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+% [T,Y] = ode23s(fn, tspan, y0);
+% plot(T,Y(:,2),'*-b','LineWidth', 2)
+%  subplot(1,3,3)
+% for i= 1:length(rVals)
+%     params.r1 = rVals(i);
+%     fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     plot(T,Y(:,3),'LineWidth', 2)
+%     ylabel('T at equilbria')
+%     title('Vary r')
+%     hold on 
+% end
+% params.r1 = 4.725
+% fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+% [T,Y] = ode23s(fn, tspan, y0);
+% plot(T,Y(:,3),'*-b','LineWidth', 2)
 %% vary params - phi
 %  y0 = [s_j0 s_a0 t0];
 %  tspan = [0 400];
@@ -130,56 +138,79 @@ end
 % ylabel('populations at equilbria')
 % legend('S_j','S_a','T')
 % title('Vary phi')
-%% Vary phi
-figure()
- y0 = [s_j0 s_a0 t0];
- tspan = [0 400];
- phiVals = .01:.05:.5;
- subplot(1,3,1)
-for i= 1:length(phiVals)
-    params.phi = phiVals(i);
-    fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
-    [T,Y] = ode23s(fn, tspan, y0);
-    plot(T,Y(:,1),'LineWidth', 2)
-    ylabel('S_j at equilbria')
-    title('Vary phi')
-    hold on 
-end
- subplot(1,3,2)
-for i= 1:length(phiVals)
-    params.phi = phiVals(i);
-    fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
-    [T,Y] = ode23s(fn, tspan, y0);
-    plot(T,Y(:,2),'LineWidth', 2)
-    ylabel('S_a at equilbria')
-    title('Vary phi')
-    hold on 
-end
- subplot(1,3,3)
-for i= 1:length(phiVals)
-    params.phi = phiVals(i);
-    fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
-    [T,Y] = ode23s(fn, tspan, y0);
-    plot(T,Y(:,3),'LineWidth', 2)
-    ylabel('T at equilbria')
-    title('Vary phi')
-    hold on 
-end
-%% buffelgrass
-%  yinit = [s_j0 s_a0 t0 b0];
+%% Vary phi - pops wrt time
+% figure()
+%  y0 = [s_j0 s_a0 t0];
 %  tspan = [0 400];
+%  phiVals = .01:.05:.5;
+%  subplot(1,3,1)
+% for i= 1:length(phiVals)
+%     params.phi = phiVals(i);
+%     fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     plot(T,Y(:,1),'LineWidth', 2)
+%     ylabel('S_j at equilbria')
+%     title('Vary phi')
+%     hold on 
+% end
+% params.phi = .07;
+% fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+% [T,Y] = ode23s(fn, tspan, y0);
+% plot(T,Y(:,1),'*-b','LineWidth', 2)
+%  subplot(1,3,2)
+% for i= 1:length(phiVals)
+%     params.phi = phiVals(i);
+%     fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     plot(T,Y(:,2),'LineWidth', 2)
+%     ylabel('S_a at equilbria')
+%     title('Vary phi')
+%     hold on 
+% end
+% params.phi = .07;
+% fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+% [T,Y] = ode23s(fn, tspan, y0);
+% plot(T,Y(:,2),'*-b','LineWidth', 2)
+%  subplot(1,3,3)
+% for i= 1:length(phiVals)
+%     params.phi = phiVals(i);
+%     fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     plot(T,Y(:,3),'LineWidth', 2)
+%     ylabel('T at equilbria')
+%     title('Vary phi')
+%     hold on 
+% end
+% params.phi = .07;
+% fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+% [T,Y] = ode23s(fn, tspan, y0);
+% plot(T,Y(:,3),'*-b','LineWidth', 2)
+%% buffelgrass
+ y0 = [s_j0 s_a0 t0 b0];
+ tspan = [0 400];
+ fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
+ [T,Y] = ode23s(fn, tspan, y0);
+% subplot(1,2,1)
+  plot(T,Y(:,1),'LineWidth', 2);
+  hold on
+  plot(T,Y(:,2),'LineWidth', 2);
+  plot(T,Y(:,3),'LineWidth', 2);
+  %plot(T,Y(:,4),'LineWidth',2);
+ xlabel('Time in Years');
+ ylabel('Population')
+%% Testing different initial condidtions - equilibrium is the same
+% hold on
+% y0 = [150 200 300 60000];
+% tspan = [0 400];
 %  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
 %  [T,Y] = ode23s(fn, tspan, y0);
-% subplot(1,2,1)
 %   plot(T,Y(:,1),'LineWidth', 2);
 %   hold on
 %   plot(T,Y(:,2),'LineWidth', 2);
 %   plot(T,Y(:,3),'LineWidth', 2);
-% %  %plot(T,Y(:,4),'LineWidth',2);
 %  xlabel('Time in Years');
 %  ylabel('Population')
-% legend('S_j','S_a','T')
-
+% legend('S_j1','S_a1','T1', 'S_j2','S_a2','T2')
 %% Vary Buffel params - theta
 %vary theta
 
@@ -397,9 +428,10 @@ Q3 = @(param)Q3_T (param,y0, T);
 Q4 = @(param)Q4_B(param,y0,T);
 % sens_mub = sensitivity_analysis(Q4,params,'mub')
 % sens_omega = sensitivity_analysis(Q4,params,'omega')
-% figure()
-% plot_sensitivity(Q1,'mua',[0.2:.01:0.8],params)
-% title('mu_a w.r.t. S_a')
+
+figure()
+plot_sensitivity(Q1,'theta_a',[0.0001],params)
+title('mu_a w.r.t. S_a')
 
 % figure()
 % contour_plot(Q2,params, linspace(0,3,40), linspace(0,.5,40),'omega','theta_j');

@@ -26,10 +26,10 @@ param_struct= ...
 }';
 params = struct(param_struct{:});
 %% Existence Conditions
-params.r1 = .01;
-params.muj = .04;
+params.r1 = .02;
+params.muj = .035;
 params.mua = .000002;
-params.alpha1 = .0045;
+params.alpha1 = .005;
 
 rd1 = calc_Rd1(params)
 rd2 = calc_Rd2(params)
