@@ -28,10 +28,10 @@ params = struct(param_struct{:});
 
 %% Simulations
 %original
-%  y0 = [s_j0 s_a0 t0];
-%  tspan = [0 400];
-%  fn = @(t,y)basicLifeCycle(t,y,params);
-%  [T,Y] = ode23s(fn, tspan, y0);
+ y0 = [s_j0 s_a0 t0];
+ tspan = [0 400];
+ fn = @(t,y)basicLifeCycle(t,y,params);
+ [T,Y] = ode23s(fn, tspan, y0);
 %  figure('DefaultAxesFontSize', 12)
 %  plot(T,Y(:,1),'LineWidth', 2);
 %  hold on
@@ -41,10 +41,10 @@ params = struct(param_struct{:});
 %  ylabel('Population')
 % legend('S_j','S_a','T')
 % Seasonality
- y0 = [s_j0 s_a0 t0];
- tspan = [0 250];
- fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 250];
+%  fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
 %  figure('DefaultAxesFontSize', 12)
 %  plot(T,Y(:,1),'LineWidth', 2);
 %  hold on
@@ -70,20 +70,21 @@ params = struct(param_struct{:});
 % legend('S_j','S_a','T')
 %% Sensitivity Analysis
 Q1 = @(param)Q1_Sa (param,y0, T);
-sensitivity_mua_a  = sensitivity_analysis(Q1,params,'mua');
+sensitivity_phi_a  = sensitivity_analysis(Q1,params,'phi')
 Q1 = @(param)Q1_Sa (param,y0, T);
-sensitivity_muj_a  = sensitivity_analysis(Q1,params,'muj');
+sensitivity_r1_a  = sensitivity_analysis(Q1,params,'r1')
+
 
 Q2 = @(param)Q2_Sj (param,y0, T);
-sensitivity_mua_j  = sensitivity_analysis(Q2,params,'mua');
+sensitivity_phi_j  = sensitivity_analysis(Q2,params,'phi')
 Q2 = @(param)Q2_Sj (param,y0, T);
-sensitivity_muj_j  = sensitivity_analysis(Q2,params,'muj');
+sensitivity_r1_j  = sensitivity_analysis(Q2,params,'r1')
 
 Q3 = @(param)Q3_T (param,y0, T);
-sensitivity_mua_t  = sensitivity_analysis(Q3,params,'mua');
+sensitivity_phi_t  = sensitivity_analysis(Q3,params,'phi')
 Q3 = @(param)Q3_T (param,y0, T);
-sensitivity_muj_t  = sensitivity_analysis(Q3,params,'muj');
+sensitivity_r1_t  = sensitivity_analysis(Q3,params,'r1')
 
-figure()
-plot_sensitivity(Q1,'mua',[0.2:.01:0.8],params)
-title('mu_a w.r.t. S_a')
+% figure()
+% plot_sensitivity(Q1,'mua',[0.2:.01:0.8],params)
+% title('mu_a w.r.t. S_a')
