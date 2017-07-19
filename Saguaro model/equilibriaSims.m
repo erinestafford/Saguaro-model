@@ -1,8 +1,8 @@
 clear all; close all;
 %% Params
-s_j0 = 200;
-s_a0 = 150;
-t0 = 300;
+s_j0 = 500;
+s_a0 = 350;
+t0 = 10;
 b0 = 1000;
 param_struct= ...
 {'r1',4.725;%
@@ -26,11 +26,12 @@ param_struct= ...
 }';
 params = struct(param_struct{:});
 %% Existence Conditions
-params.r1 = .02;
-params.muj = .035;
-params.mua = .000002;
-params.alpha1 = .005;
-
+params.alpha1 = 0.01;
+params.b = 0;
+params.sigma = 1;
+params.k1 = 100;
+params.e = 10;
+params.k2 =100;
 rd1 = calc_Rd1(params)
 rd2 = calc_Rd2(params)
 E = params.e*params.mua/params.gamma;
@@ -55,6 +56,35 @@ ShouldBeGreaterThan0ForTwoRoot = (B*B) - (4*A*C)
 % legend('S_j','S_a','T')
 
 %% Sim - two root
+s_j0 = 1;
+s_a0 = 1;
+t0 = 1;
+ y0 = [s_j0 s_a0 t0];
+ tspan = [0 400];
+ Vals = 1:10:100;
+ for i = 1:length(Vals)
+     for j = 1:length(Vals)
+         for k = 1:length(Vals)
+         y0 = [Vals(k) Vals(i) Vals(j)];
+        fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+        [T,Y] = ode45(fn, tspan, y0);
+        plot(T,Y(:,1),'LineWidth', 2);
+        plot(T,Y(:,2),'LineWidth', 2);
+        plot(T,Y(:,3),'LineWidth', 2);
+        hold on
+         end
+     end
+ end
+%  fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
+%  [T,Y] = ode45(fn, tspan, y0);
+%   plot(T,Y(:,1),'LineWidth', 2);
+%   hold on
+%   plot(T,Y(:,2),'LineWidth', 2);
+%   plot(T,Y(:,3),'LineWidth', 2);
+
+% s_j0 = 100;
+% s_a0 = 0;
+% t0 = 10;
 %  y0 = [s_j0 s_a0 t0];
 %  tspan = [0 400];
 %  fn = @(t,y)basicLifeCycle(t,y,params); %not Seasonal
@@ -65,7 +95,7 @@ ShouldBeGreaterThan0ForTwoRoot = (B*B) - (4*A*C)
 %   plot(T,Y(:,3),'LineWidth', 2);
 %  xlabel('Time in Years');
 %  ylabel('Population')
-% legend('S_j','S_a','T')
+% legend('S_j1','S_a1','T1','S_j2','S_a2','T2')
 %% Sims - Rd1 < 1 -no coexistence
 % params.r1 = .01;
 % params.muj = .3;

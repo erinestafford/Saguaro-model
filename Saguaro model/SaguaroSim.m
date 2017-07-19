@@ -22,16 +22,17 @@ param_struct= ...
 'theta_j',1/(1111*250*(1-.0027));%vary (mortality of species)/(min buffel pop)( fire frequency)
 'theta_a', 0.7/(1111*250*(1-.0027));%vary
 'theta_t', 0.63/(1111*250*(1-.0027));%vary
+'sigma',(((1/(80-35))*(1/100)*.8 )/.07)*(565+1350)/2;
 }';
 params = struct(param_struct{:});
 
 %% Simulations
 % original
- y0 = [s_j0 s_a0 t0];
- tspan = [0 300];
- fn = @(t,y)basicLifeCycle(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
-%  subplot(1,2,1)
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 4000];
+%  fn = @(t,y)basicLifeCycle(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
+% %  subplot(1,2,1)
 %  plot(T,Y(:,1),'LineWidth', 2);
 %  hold on
 %  plot(T,Y(:,2),'LineWidth', 2);
@@ -39,6 +40,7 @@ params = struct(param_struct{:});
 %  xlabel('Time in Years');
 %  ylabel('Population')
 %  legend('S_j','S_a','T')
+%  Y(end,:)
 
 %% Seasonality
 %  y0 = [s_j0 s_a0 t0];
@@ -187,7 +189,7 @@ params = struct(param_struct{:});
 % plot(T,Y(:,3),'*-b','LineWidth', 2)
 %% buffelgrass
  y0 = [s_j0 s_a0 t0 b0];
- tspan = [0 400];
+ tspan = [0 4000];
  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
  [T,Y] = ode23s(fn, tspan, y0);
 % subplot(1,2,1)
@@ -195,9 +197,10 @@ params = struct(param_struct{:});
   hold on
   plot(T,Y(:,2),'LineWidth', 2);
   plot(T,Y(:,3),'LineWidth', 2);
-  %plot(T,Y(:,4),'LineWidth',2);
+  plot(T,Y(:,4),'LineWidth',2);
  xlabel('Time in Years');
  ylabel('Population')
+ Y(end,:)
 %% Testing different initial condidtions - equilibrium is the same
 % hold on
 % y0 = [150 200 300 60000];
@@ -429,9 +432,25 @@ Q4 = @(param)Q4_B(param,y0,T);
 % sens_mub = sensitivity_analysis(Q4,params,'mub')
 % sens_omega = sensitivity_analysis(Q4,params,'omega')
 
-figure()
-plot_sensitivity(Q1,'theta_a',0.0000001:.0000001:.005,params)
-title('Sensitivity of S_a with Respect to \theta_a Over Time')
+% figure()
+% subplot(1,3,1)
+% plot_sensitivity(Q2,'theta_j',0.0000001:.0000001:.0005,params)
+% hold on
+% plot_sensitivity(Q1,'theta_j',0.0000001:.0000001:.0005,params)
+% plot_sensitivity(Q3,'theta_j',0.0000001:.0000001:.0005,params)
+% title('Change in Population w.r.t. \theta_j')
+% subplot(1,3,2)
+% plot_sensitivity(Q2,'theta_a',0.0000001:.0000001:.0005,params)
+% hold on
+% plot_sensitivity(Q1,'theta_a',0.0000001:.0000001:.0005,params)
+% plot_sensitivity(Q3,'theta_a',0.0000001:.0000001:.0005,params)
+% title('Change in Population w.r.t. \theta_a')
+% subplot(1,3,3)
+% plot_sensitivity(Q2,'theta_t',0.0000001:.0000001:.0005,params)
+% hold on
+% plot_sensitivity(Q1,'theta_t',0.0000001:.0000001:.0005,params)
+% plot_sensitivity(Q3,'theta_t',0.0000001:.0000001:.0005,params)
+% title('Change in Population w.r.t. \theta_t')
 
 % figure()
 % contour_plot(Q2,params, linspace(0,3,40), linspace(0,.5,40),'omega','theta_j');
