@@ -12,7 +12,7 @@ function [] = plot_sensitivity(Q_fn, param_name, param_range, params)
        end
     end
     
-    plot(param_range,y);
+    plot(param_range,y, 'Linewidth', 2);
     xlabel(strcat(param_name, ' value'));
-    ylabel('quantity value')
+    ylabel('Population')
 end
