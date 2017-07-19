@@ -455,3 +455,34 @@ Q4 = @(param)Q4_B(param,y0,T);
 % figure()
 % contour_plot(Q2,params, linspace(0,3,40), linspace(0,.5,40),'omega','theta_j');
 
+%% Sensitivity of R's
+% Q5 = @(param)Q5_rd1 (params);
+% sensitivity_r1_rd1  = sensitivity_analysis(Q5,params,'r1')
+% sensitivity_mua_rd1  = sensitivity_analysis(Q5,params,'mua')
+% sensitivity_muj_rd1  = sensitivity_analysis(Q5,params,'muj')
+% 
+% Q6 = @(param)Q6_rd2 (params);
+% sensitivity_r1_rd2  = sensitivity_analysis(Q6,params,'r1')
+% sensitivity_mua_rd2  = sensitivity_analysis(Q6,params,'mua')
+% sensitivity_muj_rd2  = sensitivity_analysis(Q6,params,'muj')
+% 
+% Q7= @(param)Q7_rd3 (params);
+% sensitivity_mub_rd3 = sensitivity_analysis(Q7,params,'mub')
+% sensitivity_omega_rd3  = sensitivity_analysis(Q7,params,'omega')
+% sensitivity_theta_j_rd3 = sensitivity_analysis(Q7,params,'theta_j')
+% sensitivity_theta_a_rd3 = sensitivity_analysis(Q7,params,'theta_a')
+% sensitivity_phi_rd3 = sensitivity_analysis(Q7,params,'phi')
+% sensitivity_theta_t_rd3 = sensitivity_analysis(Q7,params,'theta_t')
+% 
+% Q8=@(param)Q8_rd4 (params);
+% sensitivity_mub_rd4 = sensitivity_analysis(Q8,params,'mub')
+% sensitivity_omega_rd4 = sensitivity_analysis(Q8,params,'omega')
+% sensitivity_theta_j_rd4 = sensitivity_analysis(Q8,params,'theta_j')
+% sensitivity_theta_a_rd4 = sensitivity_analysis(Q8,params,'theta_a')
+% sensitivity_phi_rd4 = sensitivity_analysis(Q8,params,'phi')
+% sensitivity_theta_t_rd4 = sensitivity_analysis(Q8,params,'theta_t')
+
+
+
+
+
