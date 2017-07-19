@@ -28,19 +28,19 @@ params = struct(param_struct{:});
 
 %% Simulations
 % original
- y0 = [s_j0 s_a0 t0];
- tspan = [0 4000];
- fn = @(t,y)basicLifeCycle(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
-%  subplot(1,2,1)
- plot(T,Y(:,1),'LineWidth', 2);
- hold on
- plot(T,Y(:,2),'LineWidth', 2);
- plot(T,Y(:,3),'LineWidth', 2);
- xlabel('Time in Years');
- ylabel('Population')
- legend('S_j','S_a','T')
- Y(end,:)
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 4000];
+%  fn = @(t,y)basicLifeCycle(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
+% %  subplot(1,2,1)
+%  plot(T,Y(:,1),'LineWidth', 2);
+%  hold on
+%  plot(T,Y(:,2),'LineWidth', 2);
+%  plot(T,Y(:,3),'LineWidth', 2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+%  legend('S_j','S_a','T')
+%  Y(end,:)
 
 %% Seasonality
 %  y0 = [s_j0 s_a0 t0];
@@ -189,17 +189,18 @@ params = struct(param_struct{:});
 % plot(T,Y(:,3),'*-b','LineWidth', 2)
 %% buffelgrass
  y0 = [s_j0 s_a0 t0 b0];
- tspan = [0 400];
-%  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
-%  [T,Y] = ode23s(fn, tspan, y0);
-% % subplot(1,2,1)
-%   plot(T,Y(:,1),'LineWidth', 2);
-%   hold on
-%   plot(T,Y(:,2),'LineWidth', 2);
-%   plot(T,Y(:,3),'LineWidth', 2);
-%   %plot(T,Y(:,4),'LineWidth',2);
-%  xlabel('Time in Years');
-%  ylabel('Population')
+ tspan = [0 4000];
+ fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
+ [T,Y] = ode23s(fn, tspan, y0);
+% subplot(1,2,1)
+  plot(T,Y(:,1),'LineWidth', 2);
+  hold on
+  plot(T,Y(:,2),'LineWidth', 2);
+  plot(T,Y(:,3),'LineWidth', 2);
+  plot(T,Y(:,4),'LineWidth',2);
+ xlabel('Time in Years');
+ ylabel('Population')
+ Y(end,:)
 %% Testing different initial condidtions - equilibrium is the same
 % hold on
 % y0 = [150 200 300 60000];
