@@ -1,9 +1,9 @@
 clear all; close all;
 %% Params
-s_j0 = 200;
-s_a0 = 150;
-t0 = 300;
-b0 = 1000;
+s_j0 = 120;
+s_a0 = 313.8;
+t0 = 105.5;
+b0 = 2857;
 param_struct= ...
 {'r1',4.725;%
 'k1', 250;%fixed
@@ -26,36 +26,35 @@ param_struct= ...
 }';
 params = struct(param_struct{:});
 
-%% Simulations
-% original
- y0 = [s_j0 s_a0 t0];
- tspan = [0 600];
- fn = @(t,y)basicLifeCycle(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
- subplot(1,2,1)
- plot(T,Y(:,1),'LineWidth', 2);
- hold on
- plot(T,Y(:,2),'LineWidth', 2);
- plot(T,Y(:,3),'LineWidth', 2);
- xlabel('Time in Years');
- ylabel('Population')
- legend('S_j','S_a','T')
- Y(end,:)
+%% Simulations - original
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 500];
+%  fn = @(t,y)basicLifeCycle(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
+%  subplot(1,2,1)
+%  plot(T,Y(:,1),'LineWidth', 2);
+%  hold on
+%  plot(T,Y(:,2),'LineWidth', 2);
+%  plot(T,Y(:,3),'LineWidth', 2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+%  legend('S_j','S_a','T')
+%  Y(end,:)
 
 %% Seasonality
- y0 = [s_j0 s_a0 t0];
- tspan = [0 600];
- fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
- [T,Y] = ode23s(fn, tspan, y0);
- subplot(1,2,2)
- plot(T,Y(:,1),'LineWidth', 2);
- hold on
- plot(T,Y(:,2),'LineWidth', 2);
- plot(T,Y(:,3),'LineWidth', 2);
- xlabel('Time in Years');
- ylabel('Population')
- legend('S_j','S_a','T')
- Y(end,:)
+%  y0 = [s_j0 s_a0 t0];
+%  tspan = [0 600];
+%  fn = @(t,y)basicLifeCycleSeasonality(t,y,params);
+%  [T,Y] = ode23s(fn, tspan, y0);
+%  subplot(1,2,2)
+%  plot(T,Y(:,1),'LineWidth', 2);
+%  hold on
+%  plot(T,Y(:,2),'LineWidth', 2);
+%  plot(T,Y(:,3),'LineWidth', 2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+%  legend('S_j','S_a','T')
+%  Y(end,:)
 %% vary params - r wrt equilibrium
 % figure()
 %  y0 = [s_j0 s_a0 t0];
@@ -189,11 +188,11 @@ params = struct(param_struct{:});
 % [T,Y] = ode23s(fn, tspan, y0);
 % plot(T,Y(:,3),'*-b','LineWidth', 2)
 %% buffelgrass
-%  y0 = [s_j0 s_a0 t0 b0];
-%  tspan = [0 600];
-%  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
-%  [T,Y] = ode23s(fn, tspan, y0);
-% % subplot(1,2,1)
+ y0 = [s_j0 s_a0 t0 b0];
+ tspan = [0 600];
+ fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
+ [T,Y] = ode23s(fn, tspan, y0);
+%   subplot(1,2,2)
 %   plot(T,Y(:,1),'LineWidth', 2);
 %   hold on
 %   plot(T,Y(:,2),'LineWidth', 2);
@@ -202,6 +201,37 @@ params = struct(param_struct{:});
 %  xlabel('Time in Years');
 %  ylabel('Population')
 %  Y(end,:)
+
+%% Compare by population
+% subplot(1,3,1)
+% plot(T,Y(:,1),'*b','LineWidth', 2);
+% hold on
+% plot(T2,Y2(:,1),'b','LineWidth', 2);
+% xlabel('Time in Years')
+% ylabel('Juvenile Saguaro Population')
+% title('Compare Buffelgrass Extinction and Existence')
+% 
+% subplot(1,3,2)
+% plot(T,Y(:,2),'*r','LineWidth', 2);
+% hold on
+% plot(T2,Y2(:,2),'r','LineWidth', 2);
+% xlabel('Time in Years')
+% ylabel('Adult Saguaro Population')
+% title('Compare Buffelgrass Extinction and Existence')
+% 
+% subplot(1,3,3)
+% plot(T,Y(:,3),'*y','LineWidth', 2);
+% hold on
+% plot(T2,Y2(:,3), 'y','LineWidth', 2);
+% xlabel('Time in Years')
+% ylabel('Tree Population')
+% title('Compare Buffelgrass Extinction and Existence')
+
+%% 3d plot solutions
+plot3(Y(:,1),Y(:,2),Y(:,3))
+xlabel('Juvenile Saguaros')
+ylabel('Adult Saguaros')
+zlabel('Trees')
 %% Testing different initial condidtions - equilibrium is the same
 % hold on
 % y0 = [150 200 300 60000];
@@ -218,8 +248,8 @@ params = struct(param_struct{:});
 %% Vary Buffel params - theta, assume all thetas are the same
 % y0 = [s_j0 s_a0 t0 b0];
 % tspan = [0 500];
-% thetaVals = 0.7/(1111*250):0.7/(1111*(250-10)):0.7/(1111*20); %each step increasing frequency by ten years
-% % subplot(1,3,1)
+%thetaVals = 0.7/(1111*250):0.7/(1111*(250-10)):0.7/(1111*20); %each step increasing frequency by ten years
+% subplot(1,3,1)
 % for i= 1:length(thetaVals)
 %     params.theta_j = thetaVals(i);
 %     params.theta_a = thetaVals(i);
@@ -236,37 +266,64 @@ params = struct(param_struct{:});
 % ylabel('Equilibrium Population');
 % title('Increasing wildfire frequency')
 
-% subplot(1,3,2)
-% for i= 1:length(thetaVals)
-%     params.theta_j = thetaVals(i);
+%% Theta vs equlibrium vals
+% thetaAVals = [.7/(1111*250): .7/(1111*(250 - 10)):.7/(1111*5)];
+% thetaJVals = [1/(1111*250): 1/(1111*(250 - 10)):1/(1111*5)];
+% thetaTVals = [.63/(1111*250):.63/(1111*(250 - 10)):.63/(1111*5)];
+% subplot(1,3,1)
+% for i= 1:length(thetaJVals)
+%     params.theta_a = thetaAVals(i);
+%     params.theta_j = thetaJVals(i);
+%     params.theta_t = thetaTVals(i);
 %     fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
-%     [T,Y] = ode23s(fn, tspan, yinit);
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     y1(i) = Y(end,1);
+% end
+% plot(thetaJVals,y1,'LineWidth', 2);
+% xlabel('Value of \theta_a');
+% ylabel('Juvenile Saguaro Equilibrium');
+% title('Effects of Increasing Wildfire Frequency')
+% 
+% subplot(1,3,2)
+% for i= 1:length(thetaAVals)
+%     params.theta_a = thetaAVals(i);
+%     params.theta_j = thetaJVals(i);
+%     params.theta_t = thetaTVals(i);
+%     fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
 %     y2(i) = Y(end,2);
 % end
-% plot(thetaVals,y2,'LineWidth', 2);
+% plot(thetaAVals,y2,'LineWidth', 2);
 % xlabel('Value of \theta_j');
-% ylabel('Adult Saguaro Final Population');
-% title('Effects of Varying \theta_j from 0 to 0.005')
+% ylabel('Adult Saguaro Equilibrium');
+% title('Effects of Increasing Wildfire Frequency')
 % 
 % subplot(1,3,3)
 % 
-% for i= 1:length(thetaVals)
-%     params.theta_j = thetaVals(i);
+% for i= 1:length(thetaTVals)
+%     params.theta_a = thetaAVals(i);
+%     params.theta_j = thetaJVals(i);
+%     params.theta_t = thetaTVals(i);
 %     fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
-%     y3(i) = Y(end,3);
-%     [T,Y] = ode23s(fn, tspan, yinit);
+%     y3(i) = Y(end,3)
+%     [T,Y] = ode23s(fn, tspan, y0);
 % end
-% plot(thetaVals,y3,'LineWidth', 2);
-% xlabel('Value of \theta_j');
-% ylabel('Palo Verde Final Population');
+% plot(thetaTVals,y3,'LineWidth', 2);
+% xlabel('Value of \theta_T');
+% ylabel('Palo Verde Equilibrium');
+% title('Effects of Increasing Wildfire Frequency')
 
+% params.theta_t = .000002268;
+%     fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
+%     [T,Y] = ode23s(fn, tspan, y0);
+%     Y(end,:)
 %% equilibrium populations for different theta values
 
 % y0 = [s_j0 s_a0 t0 b0];
 % tspan = [0 1000];
-% thetaAVals = [.7/(1111*250) .7/(1111*(50)) .7/(1111*10) .7/(1111*5)];
-% thetaJVals = [1/(1111*250) 1/(1111*(50)) 1/(1111*10) 1/(1111*5)];
-% thetaTVals = [.63/(1111*250) .63/(1111*(50)) .63/(1111*10) .63/(1111*5)];
+% thetaAVals = [.7/(1111*250) .7/(1111*(84)) .7/(1111*10) .7/(1111*5)];
+% thetaJVals = [1/(1111*250) 1/(1111*(84)) 1/(1111*10) 1/(1111*5)];
+% thetaTVals = [.63/(1111*250) .63/(1111*(84)) .63/(1111*10) .63/(1111*5)];
 % for i= 1:length(thetaAVals)
 %     params.theta_j = thetaJVals(i);
 %     params.theta_a = thetaAVals(i);
@@ -428,37 +485,41 @@ Q1 = @(param)Q1_Sa (param,y0, T);
 % sensitivity_thetat_a  = sensitivity_analysis(Q1,params,'theta_t')
 % sensitivity_mub_a  = sensitivity_analysis(Q1,params,'mub')
 % sensitivity_omega_a  = sensitivity_analysis(Q1,params,'omega')
-% sensitivity_r1_a  = sensitivity_analysis(Q1,params,'r1') 
-% sensitivity_rho_a  = sensitivity_analysis(Q1,params,'rho')
+% % sensitivity_r1_a  = sensitivity_analysis(Q1,params,'r1') 
+% % sensitivity_rho_a  = sensitivity_analysis(Q1,params,'rho')
 % sensitivity_phi_a  = sensitivity_analysis(Q1,params,'phi')
-% sensitivity_b_a  = sensitivity_analysis(Q1,params,'b')
-
-Q2 = @(param)Q2_Sj (param,y0, T);
+% % sensitivity_b_a  = sensitivity_analysis(Q1,params,'b')
+% 
+% Q2 = @(param)Q2_Sj (param,y0, T);
 % sensitivity_thetaj_j  = sensitivity_analysis(Q2,params,'theta_j')
 % sensitivity_thetaa_j  = sensitivity_analysis(Q2,params,'theta_a')
 % sensitivity_thetat_j  = sensitivity_analysis(Q2,params,'theta_t')
 % sensitivity_mub_j  = sensitivity_analysis(Q2,params,'mub')
 % sensitivity_omega_j  = sensitivity_analysis(Q2,params,'omega')
-% sensitivity_r1_j  = sensitivity_analysis(Q2,params,'r1') 
-% sensitivity_rho_j  = sensitivity_analysis(Q2,params,'rho')
+% % sensitivity_r1_j  = sensitivity_analysis(Q2,params,'r1') 
+% % sensitivity_rho_j  = sensitivity_analysis(Q2,params,'rho')
 % sensitivity_phi_j  = sensitivity_analysis(Q2,params,'phi')
-% sensitivity_b_j  = sensitivity_analysis(Q2,params,'b')
-
-Q3 = @(param)Q3_T (param,y0, T);
+% % sensitivity_b_j  = sensitivity_analysis(Q2,params,'b')
+% 
+% Q3 = @(param)Q3_T (param,y0, T);
 % sensitivity_thetaj_t  = sensitivity_analysis(Q3,params,'theta_j')
 % sensitivity_thetaa_t  = sensitivity_analysis(Q3,params,'theta_a')
 % sensitivity_thetat_t  = sensitivity_analysis(Q3,params,'theta_t')
 % sensitivity_mub_t  = sensitivity_analysis(Q3,params,'mub')
 % sensitivity_omega_t  = sensitivity_analysis(Q3,params,'omega')
-% sensitivity_r1_t  = sensitivity_analysis(Q3,params,'r1') 
-% sensitivity_rho_t  = sensitivity_analysis(Q3,params,'rho')
+% % sensitivity_r1_t  = sensitivity_analysis(Q3,params,'r1') 
+% % sensitivity_rho_t  = sensitivity_analysis(Q3,params,'rho')
 % sensitivity_phi_t  = sensitivity_analysis(Q3,params,'phi')
-% sensitivity_b_t  = sensitivity_analysis(Q3,params,'b')
-
-Q4 = @(param)Q4_B(param,y0,T);
+% % sensitivity_b_t  = sensitivity_analysis(Q3,params,'b')
+% 
+% Q4 = @(param)Q4_B(param,y0,T);
 % sens_mub = sensitivity_analysis(Q4,params,'mub')
 % sens_omega = sensitivity_analysis(Q4,params,'omega')
 
+%% Tornado Plot
+% y = [sensitivity_thetaj_a ,sensitivity_thetaa_a,sensitivity_thetat_a, sensitivity_mub_a, sensitivity_omega_a,sensitivity_phi_a,sensitivity_thetaj_j ,sensitivity_thetaa_j,sensitivity_thetat_j, sensitivity_mub_j, sensitivity_omega_j,sensitivity_phi_j,sensitivity_thetaj_t ,sensitivity_thetaa_t,sensitivity_thetat_t, sensitivity_mub_t, sensitivity_omega_t,sensitivity_phi_t, sens_mub,sens_omega]
+% bar(y)
+%% plot sensitivity
 % figure()
 % subplot(1,3,1)
 % plot_sensitivity(Q2,'theta_j',0.0000001:.0000001:.0005,params)
