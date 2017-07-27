@@ -1,0 +1,47 @@
+%\begin{center}
+\captionof{table}{Model Parameters} \label{table:1} 
+\begin{longtable}{m{1cm} m{6cm} m{1.5cm} m{1cm} m{1.3cm}}
+%{| >{\centering\arraybackslash}m{.8cm} | >{\centering\arraybackslash}m{2.7cm} | >{\centering\arraybackslash}m{1.5cm} | >{\centering\arraybackslash}m{.8cm} | }
+\hline
+\textbf{Parameter} &\textbf{Description} & \textbf{Units} & \textbf{Value} & \textbf{Reference}\\
+\hline
+\hline\\
+\rule{0pt}{.7cm}$r$ & Rate that seeds are germinated and survive to one year & $\displaystyle\frac{juvenile}{adult\cdot year}$ & 4.725 & \cite{saguaroInformative, steenbergh1977ecology, EcofSaguaro}\\
+
+\rule{0pt}{.7cm}$\epsilon$ & Proportion of space taken up by juvenile saguaros compared to adult saguaros & unitless & 0.113 & \cite{Drezner2014,NPSsaguaroRoots}\\
+
+\rule{0pt}{.7cm}$k_1$ & Number of adult saguaros that can survive in a given space & Indv & 250 & \cite{A-SdesertMuseum}\\
+
+\rule{0pt}{.7cm}$b$ & Average number of juveniles that survive under a nurse tree per tree & Indv & 0.8 & \cite{Bashan2009}\\
+
+\rule{0pt}{.7cm}$\gamma$ & Rate that juveniles become adults & $\displaystyle\frac{1}{year}$ & $\displaystyle\frac{1}{35}$ & \cite{SaguaroGrowth} \\
+
+\rule{0pt}{.7cm}$\mu_j$ & Death rate of juveniles per year & $\displaystyle\frac{1}{year}$ & $\displaystyle\frac{0.5}{12}$ & \cite{Orum}\\
+
+\rule{0pt}{.7cm}$\alpha_1$ & Rate at which a trees will outcompete saguaros & $\displaystyle\frac{1}{year}$ & \num{1e-6} & assumed\\
+
+\rule{0pt}{.7cm}$k_2$ & Average number of adults and nurse trees found in an area (one hectare) & Indv &  957.5 & \cite{A-SdesertMuseum,paloVerdeFacts} \\
+
+\rule{0pt}{.7cm}$\mu_a$ & Death rate of adults per year & $\displaystyle\frac{1}{year}$ & $\displaystyle\frac{1}{140}$ & \cite{SaguaroGrowth}\\
+
+\rule{0pt}{.7cm}$\phi$ & Logistic growth term for palo verde population &  $\displaystyle\frac{1}{year}$ & 0.07 & \cite{paloVerdeFacts}\\
+
+\rule{0pt}{.7cm}$\rho$ & Rate that trees die due to competition with adult saguaros & $\displaystyle\frac{1}{year\cdot indv.}$&$\frac{0.8}{45 \cdot 100}$ & \cite{Orum,PaloVFact,Bashan2009}\\
+
+\rule{0pt}{.7cm}$\sigma$ & Proportion of the carrying capacity & unitless & $\displaystyle\frac{\rho \cdot k_2}{\phi}$=2.432 & \cite{Orum,PaloVFact,Bashan2009,A-SdesertMuseum,paloVerdeFacts}\\
+
+\rule{0pt}{.7cm}$\theta_j$ & Frequency of buffelgrass caused wildfires and their effects on juvenile saguaros & $\displaystyle\frac{1}{year \cdot grass}$ & \num{3.61e-6} & \cite{kaufman2007invasive,FirePdistance,BuffelManag,Wildfire}\\
+
+\rule{0pt}{.7cm}$\theta_a$ & Frequency of buffelgrass caused wildfires and their effects on adult saguaros & $\displaystyle\frac{1}{year \cdot grass}$ & \num{2.71e-6} & \cite{buyuktahtakin2014invasive,kaufman2007invasive,FirePdistance,BuffelManag,Wildfire}\\
+
+\rule{0pt}{.7cm}$\theta_t$ & Frequency of buffelgrass caused wildfires and their effects on trees & $\displaystyle\frac{1}{year \cdot grass}$ & \num{2.27e-6} & \cite{FireEffects,kaufman2007invasive,FirePdistance,BuffelManag,Wildfire} \\
+
+\rule{0pt}{.7cm}$\omega$ & Logistic growth term for buffelgrass population (birth-death) & $\displaystyle\frac{1}{year}$ & .35 & \cite{NPSbuffelFact}\\
+
+\rule{0pt}{.7cm}$\mu_B$ & Death of buffelgrass by harvesting & $\displaystyle\frac{1}{year}$ & $\displaystyle\frac{1}{3}$ & \cite{NPSbuffel}\\
+
+\rule{0pt}{.7cm}$k_3$ & Average number of buffelgrass found in an area (one hectare) & Indv & 60,000 & \cite{buyuktahtakin2014invasive}\\ \\
+\hline
+
+\end{longtable}
+%\end{center}

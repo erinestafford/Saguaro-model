@@ -1,0 +1,33 @@
+\begin{figure}[H]
+    \begin{center}
+        \begin{tikzpicture}[node distance=2cm]
+        \node (eq1) [squ, xshift = -4cm,yshift=-3cm] {$S_j$};
+        \node (eq2) [squ, right, xshift=-1cm, yshift=-3cm] {$S_a$};
+        \draw [arrow] (eq1) -- node[anchor=south] {$\gamma S_j$}(eq2);
+        \node (eq3) [squ, xshift=-6cm, yshift=-7cm] {$T$};
+        \node (eq4) [squ, xshift = 2cm, yshift = -7 cm]{$B$};
+        \coordinate (plain1) at (-4,-0.75) {};
+        \draw [arrow] (plain1)--node[anchor=east]{$r S_a\cdot\text{max}\left\lbrace0,\left(1-\displaystyle\frac{\epsilon S_j + S_a}{k_1 + b T}\right)\right\rbrace$}(eq1);
+        
+        \coordinate (plain2) at (-4,-5){};
+        
+        \draw[arrow](eq1)--node[anchor=east]{$\left(\mu_j + \theta_j B\right)S_j$}(plain2);
+        
+        \coordinate (plain3) at (5,-3){};
+        \draw [arrow](eq2)--node[anchor=south]{$\left(\mu_a + \theta_a B\right)S_a + \displaystyle\frac{\alpha_1}{k_2} S_a T$}(plain3);
+        
+        \coordinate(plain4) at (-.75,-7){};
+        \draw [arrow](eq3)--node[anchor=south]{$\phi T \left( \displaystyle\frac{T}{k_2}\right) + \left(\rho S_a + \theta_T B\right) T$}(plain4);
+        
+        \coordinate(plain5) at (-8,-7){};
+        \draw[arrow](plain5)--node[anchor=south]{$\phi T$}(eq3);
+        
+        \coordinate (plain6) at (0,-7){};
+        \draw[arrow](plain6) -- node[anchor = south]{$\omega B$}(eq4);
+        
+        \coordinate(plain7) at (6,-7){};
+        \draw[arrow](eq4) -- node[anchor = south]{$\displaystyle\omega B\left(\frac{B}{k_3}\right) + \mu_b B$}(plain7);
+        \end{tikzpicture}
+    \end{center}
+    \label{fig:tikz}
+\end{figure}

@@ -1,0 +1,35 @@
+\begin{figure}
+    \begin{center}
+    \tiny{
+        \begin{tikzpicture}[scale = 0.5,node distance=1cm]
+        \node (eq1) [squ, xshift = -4cm,yshift=-1cm] {$S_j$};
+        \node (eq2) [squ, right, xshift=-1cm, yshift=-1cm] {$S_a$};
+        \draw [arrow] (eq1) -- node[anchor=south] {$\gamma S_j$}(eq2);
+        \node (eq3) [squ, xshift=-6cm, yshift=-4cm] {$T$};
+        \node (eq4) [squ, xshift = 1cm, yshift = -4 cm]{$B$};
+        \coordinate (plain1) at (-8,1) {};
+        \draw [arrow] (plain1)--node[anchor=east]{$\textcolor{blue}{r} S_a\cdot\text{max}\left\lbrace0,\left(1-\displaystyle\frac{\epsilon S_j + S_a}{k_1 + \textcolor{blue}{b} T}\right)\right\rbrace$}(eq1);
+        
+        \coordinate (plain2) at (-8,-5){};
+        
+        \draw[arrow](eq1)--node[anchor=east]{$\left(\mu_j + \textcolor{red}{\theta_j} B\right)S_j$}(plain2);
+        
+        \coordinate (plain3) at (6.5,-2){};
+        \draw [arrow](eq2)--node[anchor=south]{$\left(\mu_a + \textcolor{red}{\theta_a} B\right)S_a + \displaystyle\frac{\alpha_1}{k_2} S_a T$}(plain3);
+        
+        \coordinate(plain4) at (-4,-8){};
+        \draw [arrow](eq3)--node[anchor=south]{$\phi T \left( \displaystyle\frac{T}{k_2}\right) + \left(\rho S_a + \textcolor{red}{\theta_T} B\right) T$}(plain4);
+        
+        \coordinate(plain5) at (-15,-8){};
+        \draw[arrow](plain5)--node[anchor=south]{$\textcolor{blue}{\phi} T$}(eq3);
+        
+        \coordinate (plain6) at (-2,-8){};
+        \draw[arrow](plain6) -- node[anchor = south]{$\textcolor{blue}{\omega} B$}(eq4);
+        
+        \coordinate(plain7) at (7.5,-8){};
+        \draw[arrow](eq4) -- node[anchor = south]{$\displaystyle\omega B\left(\frac{B}{k_3}\right) + \textcolor{blue}{\mu_B} B$}(plain7);
+        \end{tikzpicture}
+        }
+    \end{center}
+    \label{fig:tikz}
+\end{figure}

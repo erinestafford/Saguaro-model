@@ -1,0 +1,25 @@
+\begin{figure}[H]
+    \begin{center}
+        \begin{tikzpicture}[node distance=2cm]
+        \node (eq1) [squ, xshift = -2cm,yshift=-3cm] {$S_j$};
+        \node (eq2) [squ, right, xshift=1cm, yshift=-3cm] {$S_a$};
+        \draw [arrow] (eq1) -- node[anchor=south] {$\gamma S_j$}(eq2);
+        \node (eq3) [squ, xshift=0cm, yshift=-6cm] {$T$};
+        \coordinate (plain1) at (-2,-0.75) {};
+        \draw [arrow] (plain1)--node[anchor=east]{$r S_a\cdot\text{max}\left\lbrace0,\left(1-\displaystyle\frac{\epsilon S_j + S_a}{k_1 + b T}\right)\right\rbrace$}(eq1);
+        \coordinate (plain2) at (-2,-5){};
+        
+        \draw[arrow](eq1)--node[anchor=east]{$\mu_j S_j$}(plain2);
+        
+        \coordinate (plain3) at (5.5,-3){};
+        \draw [arrow](eq2)--node[anchor=south]{$\mu_a S_a + \displaystyle\frac{\alpha_1}{k_2} S_a T$}(plain3);
+        
+        \coordinate(plain4) at (4,-6){};
+        \draw [arrow](eq3)--node[anchor=south]{$\phi T \left( \displaystyle\frac{T}{k_2}\right) + \rho S_a T$}(plain4);
+        
+        \coordinate(plain5) at (-2,-6){};
+        \draw[arrow](plain5)--node[anchor=south]{$\phi T$}(eq3);
+        \end{tikzpicture}
+    \end{center}
+    \label{fig:tikz}
+\end{figure}
