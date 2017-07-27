@@ -1,9 +1,9 @@
 clear all; close all;
 %% Params
-s_j0 = 200;
-s_a0 = 150;
-t0 = 300;
-b0 = 1000;
+s_j0 = 157.588;
+s_a0 = 313.478;
+t0 = 105.202;
+b0 = 2857.14;
 param_struct= ...
 {'r1',4.725;%
 'k1', 250;%fixed
@@ -193,14 +193,14 @@ params = struct(param_struct{:});
  fn = @(t,y)lifeCycleWithBuffelgrass(t,y,params); %not Seasonal
  [T,Y] = ode23s(fn, tspan, y0);
 % subplot(1,2,1)
-  plot(T,Y(:,1),'LineWidth', 2);
-  hold on
-  plot(T,Y(:,2),'LineWidth', 2);
-  plot(T,Y(:,3),'LineWidth', 2);
-  plot(T,Y(:,4),'LineWidth',2);
- xlabel('Time in Years');
- ylabel('Population')
- Y(end,:)
+%   plot(T,Y(:,1),'LineWidth', 2);
+%   hold on
+%   plot(T,Y(:,2),'LineWidth', 2);
+%   plot(T,Y(:,3),'LineWidth', 2);
+%   plot(T,Y(:,4),'LineWidth',2);
+%  xlabel('Time in Years');
+%  ylabel('Population')
+%  Y(end,:)
 %% Testing different initial condidtions - equilibrium is the same
 % hold on
 % y0 = [150 200 300 60000];
@@ -403,7 +403,7 @@ Q1 = @(param)Q1_Sa (param,y0, T);
 % sensitivity_omega_a  = sensitivity_analysis(Q1,params,'omega')
 % sensitivity_r1_a  = sensitivity_analysis(Q1,params,'r1') 
 % sensitivity_rho_a  = sensitivity_analysis(Q1,params,'rho')
-% sensitivity_phi_a  = sensitivity_analysis(Q1,params,'phi')
+sensitivity_phi_a  = sensitivity_analysis(Q1,params,'phi')
 % sensitivity_b_a  = sensitivity_analysis(Q1,params,'b')
 
 Q2 = @(param)Q2_Sj (param,y0, T);
@@ -414,7 +414,7 @@ Q2 = @(param)Q2_Sj (param,y0, T);
 % sensitivity_omega_j  = sensitivity_analysis(Q2,params,'omega')
 % sensitivity_r1_j  = sensitivity_analysis(Q2,params,'r1') 
 % sensitivity_rho_j  = sensitivity_analysis(Q2,params,'rho')
-% sensitivity_phi_j  = sensitivity_analysis(Q2,params,'phi')
+sensitivity_phi_j  = sensitivity_analysis(Q2,params,'phi')
 % sensitivity_b_j  = sensitivity_analysis(Q2,params,'b')
 
 Q3 = @(param)Q3_T (param,y0, T);
@@ -425,10 +425,10 @@ Q3 = @(param)Q3_T (param,y0, T);
 % sensitivity_omega_t  = sensitivity_analysis(Q3,params,'omega')
 % sensitivity_r1_t  = sensitivity_analysis(Q3,params,'r1') 
 % sensitivity_rho_t  = sensitivity_analysis(Q3,params,'rho')
-% sensitivity_phi_t  = sensitivity_analysis(Q3,params,'phi')
+sensitivity_phi_t  = sensitivity_analysis(Q3,params,'phi')
 % sensitivity_b_t  = sensitivity_analysis(Q3,params,'b')
 
-Q4 = @(param)Q4_B(param,y0,T);
+% Q4 = @(param)Q4_B(param,y0,T);
 % sens_mub = sensitivity_analysis(Q4,params,'mub')
 % sens_omega = sensitivity_analysis(Q4,params,'omega')
 
